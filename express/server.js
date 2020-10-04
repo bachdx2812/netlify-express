@@ -7,14 +7,6 @@ const bodyParser = require('body-parser');
 
 const routes = require('./api/routes');
 
-routes.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<h1>Hello from Express.js!</h1>');
-  res.end();
-});
-routes.get('/another', (req, res) => res.json({ route: req.originalUrl }));
-routes.post('/', (req, res) => res.json({ postBody: req.body }));
-
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', routes);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
